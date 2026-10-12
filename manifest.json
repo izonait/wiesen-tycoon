@@ -1,0 +1,18 @@
+{
+    "name": "Wiesen-Tycoon",
+    "short_name": "Wiesen-Tycoon",
+    "start_url": ".",
+    "scope": ".",
+    "display": "standalone",
+    "background_color": "#7CC8F2",
+    "theme_color": "#3E8E2F",
+    "description": "Mäh die Wiese, verkaufe Gras und werde Wiesen-Tycoon.",
+    "orientation": "portrait-primary",
+    "prefer_related_applications": false,
+    "icons": [
+        {"src": "icons/Icon-192.png", "sizes": "192x192", "type": "image/png"},
+        {"src": "icons/Icon-512.png", "sizes": "512x512", "type": "image/png"},
+        {"src": "icons/Icon-maskable-192.png", "sizes": "192x192", "type": "image/png", "purpose": "maskable"},
+        {"src": "icons/Icon-maskable-512.png", "sizes": "512x512", "type": "image/png", "purpose": "maskable"}
+    ]
+}
