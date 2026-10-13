@@ -41,6 +41,26 @@ if (!window._flutter) {
 _flutter.buildConfig = {"engineRevision":"deb287481e3ce9468f3434937ced4240a70539ca","wasmHashes":{"skwasm_heavy.wasm":"565f5cc1cca6ab120f11934b105f01fec4b58b480c82e0889dca93af8e6f8635","chromium/canvaskit.wasm":"ae8ff1d858140f7b1300ced3fa89fb8c9dce0a400a0f4f1e11f6dcfb3315fdcf","webparagraph/canvaskit.wasm":"0ce1b05082efdc8529550e8a01f6ff0593972d55525035010e26f5600aa9f254","skwasm.wasm":"e540fd5e8303b7b68ec2718cb49e9c421f8ade3075b15e02a7059a62654df9a1","canvaskit.wasm":"fbed517a43e82452404446683f00f2e876d835aed84410695759e67b6bb01cd3","wimp.wasm":"e924eaafd801d41e017d178f3fd5cf8a417f641fe35c9ed34a4e1d7582283e0c"},"builds":[{"compileTarget":"dart2js","renderer":"canvaskit","mainJsPath":"main.dart.js"},{}],"useLocalCanvasKit":true};
 
 
+// Auflösung begrenzen: iPhones rechnen sonst mit dreifacher Pixeldichte,
+// das kostet viel Leistung und sieht kaum schärfer aus. Mit der Grafik-
+// Einstellung „Schnell“ noch etwas weniger.
+(function () {
+  var real = window.devicePixelRatio || 1;
+  var fast = false;
+  try {
+    fast = localStorage.getItem("flutter.gfx_fast") === "true";
+  } catch (e) {}
+  var cap = fast ? 1.5 : 2;
+  if (real > cap) {
+    try {
+      Object.defineProperty(window, "devicePixelRatio", {
+        get: function () { return cap; },
+        configurable: true,
+      });
+    } catch (e) {}
+  }
+})();
+
 _flutter.loader.load({
   config: {
     // Emoji-Schrift liegt im Paket, damit nichts aus dem Netz nachgeladen wird.
