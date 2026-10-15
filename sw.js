@@ -1,7 +1,7 @@
 // Offline-Speicher für Wiesen-Tycoon (automatisch erzeugt von tool/make_pwa.sh).
 // Beim Installieren werden die Kerndateien gespeichert, alles andere (Grafik-
 // Engine, Töne, Schriften) beim ersten Laden. Danach startet das Spiel offline.
-const CACHE = "wiesen-59f59f14ea17";
+const CACHE = "wiesen-607940680f88";
 const CORE = ["./", "index.html", "flutter_bootstrap.js", "flutter.js", "main.dart.js", "manifest.json", "icons/apple-touch-icon.png"];
 self.addEventListener("install", (e) => {
   e.waitUntil(caches.open(CACHE).then((c) => c.addAll(CORE)).then(() => self.skipWaiting()));
