@@ -32,7 +32,18 @@
     // Eigener Service Worker: speichert alle Dateien, damit das Spiel offline startet.
     if ("serviceWorker" in navigator) {
       window.addEventListener("load", function () {
-        navigator.serviceWorker.register("sw.js").catch(function () {});
+        var hadController = !!navigator.serviceWorker.controller;
+        navigator.serviceWorker
+          .register("sw.js", { updateViaCache: "none" })
+          .then(function (reg) { reg.update(); })
+          .catch(function () {});
+        // Neue Version übernommen: einmal neu laden, damit sie sofort läuft.
+        var reloaded = false;
+        navigator.serviceWorker.addEventListener("controllerchange", function () {
+          if (!hadController || reloaded) return;
+          reloaded = true;
+          window.location.reload();
+        });
       });
     }
   </script>
